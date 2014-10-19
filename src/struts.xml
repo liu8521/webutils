@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<constant name="struts.locale" value="zh_CN"/>
+    <package name="default" namespace="/" extends="struts-default">
+       
+       <!-- 获取天气 -->
+       <action name="findWeather"
+       			class="cn.liuning.action.FindWeatherAction">
+       		<result name="success">/WEB-INF/weather/listweather.jsp</result>
+       		<result name="error">/WEB-INF/message.jsp</result>
+       </action>
+       
+       <!-- 获取四六级成绩 -->
+       <action name="findCetScore">
+       		<result>/WEB-INF/cetscore/findcetscore.jsp</result>
+       </action>
+       <action name="getCetScore"
+       			class="cn.liuning.action.GetCetScoreAction">
+       		<result>/WEB-INF/cetscore/listcetscore.jsp</result>
+      		<exception-mapping result="indexoutof" exception="java.lang.Exception"></exception-mapping>
+       		<result name="indexoutof">/WEB-INF/cetscore/listcetscore.jsp</result>
+       </action>
+       
+       <!-- 查询图书馆借书 -->
+       <action name="findLibrary">
+       		<result>/WEB-INF/library/findlibrary.jsp</result>
+       </action>
+       <action name="getLibrary"
+       			class="cn.liuning.action.GetLibraryAction">
+       		<result>/WEB-INF/library/listlibrary.jsp</result>
+       		<exception-mapping result="exce" exception="java.lang.Exception"></exception-mapping>
+       		<result name="exce">/WEB-INF/library/listlibrary.jsp</result>
+       </action>
+       
+       <!--URL编码编码  -->
+       <action name="urlEncoding"
+        		class="cn.liuning.action.URLEncodingAction">
+       		<result>/WEB-INF/smallutils/urlencoding.jsp</result>
+       </action>
+       
+       <!--native2Ascii编码  -->
+       <action name="native2Ascii"
+       			class="cn.liuning.action.Native2AsciiAction">
+       		<result>/WEB-INF/smallutils/native2ascii.jsp</result>
+       </action>
+       
+       <!-- 通配action -->
+       <action name="*">
+            <result>/{1}.jsp</result>
+       </action>
+    </package>
+</struts>
